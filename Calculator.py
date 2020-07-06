@@ -1,43 +1,71 @@
+# import all from tKinter for GUI
 from tkinter import *
 
-from tkinter import messagebox
+# global variable, entered values are stored in this variable then calculated by the eval function
+operator = ""
 
 
 def error():
     error_msg = "Error"
-    calcInput.set(error_msg)
+    calc_input.set(error_msg)
 
 
+# function for adding entered values to the global variable 'operator' as a string
 def btn_click(numbers):
+    # introducing globally declared 'operator' to this function
     global operator
+
+    # concatenate entering values to global 'operator'
     operator = operator + str(numbers)
-    calcInput.set(operator)
+
+    # update value of 'operator' and show it on calculator display
+    calc_input.set(operator)
 
 
+# function for delete the last entered value from the string 'operator'
 def backspace():
     global operator
+
+    # delete the last entered value from the string 'operator' and update it.
     operator = operator[:-1]
-    calcInput.set(operator)
+    calc_input.set(operator)
 
 
+# function for clear all values from 'operator' / display
 def btn_clear_display():
     global operator
+
+    # change value of string 'operator' to "" (clear all) and update it.
     operator = ""
-    calcInput.set(operator)
+    calc_input.set(operator)
 
 
+# function for calculating the values of 'operator' using a built-in function 'eval()'
 def btn_equals():
     global operator
-    sum = str(eval(operator))
-    calcInput.set(sum)
-    operator = ""
+
+    # calculate the values of string by using 'eval' function
+    sum_ans = str(eval(operator))
+    calc_input.set(sum_ans)
+
+    # to clear all from 'operator' , after a calculation is done.
+    # operator = ""
+
+    # to store the answer to 'operator' , and continue calculation.
+    operator = sum_ans
 
 
+# create a gui window for calculator.
 calculator = Tk()
-calculator.title("python Calculator")
-operator = ""
-calcInput = StringVar()
 
+# give a title to the window.
+calculator.title("python Calculator")
+
+# create a variable to store entering values,
+# and make it a string variable using 'StringVar' method.
+calc_input = StringVar()
+
+# import images for use as buttons
 img_1 = PhotoImage(file='images/1.png')
 img_2 = PhotoImage(file='images/2.png')
 img_3 = PhotoImage(file='images/3.png')
@@ -59,15 +87,27 @@ img_div = PhotoImage(file='images/div.png')
 img_mult = PhotoImage(file='images/x.png')
 img_sq = PhotoImage(file='images/square.png')
 
-calc_display = Entry(calculator, font=("arial", 40, "bold"), textvariable=calcInput, border=0,
-                     width=13, justify="right")
+# create a display for calculator using Entry widget and show variable 'calc_input' on it.
+# customizing calculator display
+calc_display = Entry(
+                     calculator,
+                     font=("arial", 40, "bold"),
+                     textvariable=calc_input,
+                     border=0,
+                     width=13,
+                     justify="right"
+                    )
 calc_display.grid(columnspan=4)
 calc_display.config(highlightthickness=5)
 calc_display.config(highlightbackground="black")
 
-# Number & Operator Keys
-# ac,c,%,x
+# Number & Operator Buttons
+###########################
+
+# all clear, backspace, %, x
+# create a Button widget, set an image as the button, pass a command to a defined function using lambda function
 btn_ac = Button(calculator, border=0, image=img_ac, command=lambda: btn_clear_display())
+#  set the position of button on the grid
 btn_ac.grid(row=1, column=0)
 
 btn_clr = Button(calculator, border=0, image=img_c, command=lambda: backspace())
@@ -79,9 +119,7 @@ btn_percentage.grid(row=1, column=2)
 btn_mult = Button(calculator, border=0, image=img_mult, command=lambda: btn_click("*"))
 btn_mult.grid(row=1, column=3)
 
-# 7,8,9,/
-# btn_7 = Button(calculator, padx=16, fg="#181818", bd=5, font=("arial", 30, "bold"), text="7",
-#               command=lambda: btn_click(7))
+# 7, 8, 9, /
 btn_7 = Button(calculator, border=0, image=img_7, command=lambda: btn_click(7))
 btn_7.grid(row=2, column=0)
 
@@ -94,7 +132,7 @@ btn_9.grid(row=2, column=2)
 btn_div = Button(calculator, border=0, image=img_div, command=lambda: btn_click("/"))
 btn_div.grid(row=2, column=3)
 
-# 4,5,6,-
+# 4, 5, 6, -
 btn_4 = Button(calculator, border=0, image=img_4, command=lambda: btn_click(4))
 btn_4.grid(row=3, column=0)
 
@@ -104,10 +142,10 @@ btn_5.grid(row=3, column=1)
 btn_6 = Button(calculator, border=0, image=img_6, command=lambda: btn_click(6))
 btn_6.grid(row=3, column=2)
 
-btnSubs = Button(calculator, border=0, image=img_sub, command=lambda: btn_click("-"))
-btnSubs.grid(row=3, column=3)
+btn_sub = Button(calculator, border=0, image=img_sub, command=lambda: btn_click("-"))
+btn_sub.grid(row=3, column=3)
 
-# 1,2,3,+
+# 1, 2, 3, +
 btn_1 = Button(calculator, border=0, image=img_1, command=lambda: btn_click(1))
 btn_1.grid(row=4, column=0)
 
@@ -120,7 +158,7 @@ btn_3.grid(row=4, column=2)
 btn_add = Button(calculator, border=0, image=img_add, command=lambda: btn_click("+"))
 btn_add.grid(row=4, column=3)
 
-# .,0,**,=
+# dot, 0, square, =
 btn_0 = Button(calculator, border=0, image=img_0, command=lambda: btn_click(0))
 btn_0.grid(row=5, column=0)
 
