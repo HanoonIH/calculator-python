@@ -1,0 +1,11 @@
+this basic python calculator is made with:
+python 3.8.3
+tkinter (install it using pip)
+
+this calculator contains image files (png)
+image files are attached in the project folder in 'images' folder
+
+this calculator using 'Digital-7' font for display
+font file (.ttf) is attached in the project folder,
+install it first on your system,
+if this font is not available > switch to default font as commented on the project file.

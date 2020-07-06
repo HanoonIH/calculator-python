@@ -1,13 +1,8 @@
-# import all from tKinter for GUI
+# import all from tkinter for GUI
 from tkinter import *
 
 # global variable, entered values are stored in this variable then calculated by the eval function
 operator = ""
-
-
-def error():
-    error_msg = "Error"
-    calc_input.set(error_msg)
 
 
 # function for adding entered values to the global variable 'operator' as a string
@@ -41,18 +36,28 @@ def btn_clear_display():
 
 
 # function for calculating the values of 'operator' using a built-in function 'eval()'
+
 def btn_equals():
-    global operator
+    # using try exception - to show an 'error' message if an error occurred while clicking '=' button
+    try:
 
-    # calculate the values of string by using 'eval' function
-    sum_ans = str(eval(operator))
-    calc_input.set(sum_ans)
+        global operator
 
-    # to clear all from 'operator' , after a calculation is done.
-    # operator = ""
+        # calculate the values of string by using 'eval' function
+        sum_ans = str(eval(operator))
+        calc_input.set(sum_ans)
 
-    # to store the answer to 'operator' , and continue calculation.
-    operator = sum_ans
+        # to clear all from 'operator' , after a calculation is done.
+        # operator = ""
+
+        # to store the answer to 'operator' , and continue calculation.
+        operator = sum_ans
+    except:
+        # to display an "error" message on display
+        calc_input.set("Error")
+
+        # to clear 'operator' after an error.
+        operator = ""
 
 
 # create a gui window for calculator.
@@ -90,13 +95,16 @@ img_sq = PhotoImage(file='images/square.png')
 # create a display for calculator using Entry widget and show variable 'calc_input' on it.
 # customizing calculator display
 calc_display = Entry(
-                     calculator,
-                     font=("arial", 40, "bold"),
-                     textvariable=calc_input,
-                     border=0,
-                     width=13,
-                     justify="right"
-                    )
+    calculator,
+    # digital-7 font- .ttf file is attached with project file > first install it on your system
+    font=('digital-7', 45),
+    # if the font above is not working > comment the line of code above > then enable following line of code
+    # font=('arial', 40, 'bold'),
+    textvariable=calc_input,
+    border=0,
+    width=13,
+    justify="right"
+)
 calc_display.grid(columnspan=4)
 calc_display.config(highlightthickness=5)
 calc_display.config(highlightbackground="black")
