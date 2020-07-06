@@ -73,13 +73,13 @@ btn_ac.grid(row=1, column=0)
 btn_clr = Button(calculator, border=0, image=img_c, command=lambda: backspace())
 btn_clr.grid(row=1, column=1)
 
-btn_percentage = Button(calculator, border=0, image=img_per, command=lambda: btn_click())
+btn_percentage = Button(calculator, border=0, image=img_per, command=lambda: btn_click("%"))
 btn_percentage.grid(row=1, column=2)
 
 btn_mult = Button(calculator, border=0, image=img_mult, command=lambda: btn_click("*"))
 btn_mult.grid(row=1, column=3)
 
-# 7,8,9,+
+# 7,8,9,/
 # btn_7 = Button(calculator, padx=16, fg="#181818", bd=5, font=("arial", 30, "bold"), text="7",
 #               command=lambda: btn_click(7))
 btn_7 = Button(calculator, border=0, image=img_7, command=lambda: btn_click(7))
@@ -107,7 +107,7 @@ btn_6.grid(row=3, column=2)
 btnSubs = Button(calculator, border=0, image=img_sub, command=lambda: btn_click("-"))
 btnSubs.grid(row=3, column=3)
 
-# 1,2,3,x
+# 1,2,3,+
 btn_1 = Button(calculator, border=0, image=img_1, command=lambda: btn_click(1))
 btn_1.grid(row=4, column=0)
 
@@ -120,7 +120,7 @@ btn_3.grid(row=4, column=2)
 btn_add = Button(calculator, border=0, image=img_add, command=lambda: btn_click("+"))
 btn_add.grid(row=4, column=3)
 
-# .,0,equal
+# .,0,**,=
 btn_0 = Button(calculator, border=0, image=img_0, command=lambda: btn_click(0))
 btn_0.grid(row=5, column=0)
 
